@@ -57,22 +57,45 @@
     }
 </script>
 
-<div>
+<div class="game-container">
     {#if gameStarted}
         <span>Score: {score}</span>
-        <div class="line">{line.lyrics}</div>
-        {#each line.songOptions as songOption}
-            <button
-                on:click={() =>
-                    songOption.correct ? onCorrect() : onFailure()}
-            >
-                {songOption.song}
-            </button>
-        {/each}
+        <span class="line">{line.lyrics}</span>
+        <div class="button-container">
+            {#each line.songOptions as songOption}
+                <button
+                    on:click={() =>
+                        songOption.correct ? onCorrect() : onFailure()}
+                >
+                    {songOption.song}
+                </button>
+            {/each}
+        </div>
     {:else}
         <div>
-            <span>Frag nicht was für Score: {score}</span>
+            <span class="lose-message">Frag nicht was für Score: {score}</span>
             <button on:click={resetGame}>Noch einmal</button>
         </div>
     {/if}
 </div>
+
+<style>
+    .game-container {
+        padding: 32px;
+        border-radius: 15px;
+        background-color: #373a36;
+        color: white;
+    }
+
+    .line, .lose-message{
+        display: block;
+        margin-bottom: 2rem;
+    }
+
+    .button-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2rem;
+        width: 100%;
+    }
+</style>
