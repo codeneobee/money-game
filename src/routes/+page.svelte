@@ -4,7 +4,7 @@
 
     async function loadData(): Promise<Line[]> {
         const response = await fetch("lines_songs.json");
-        return await response.json()
+        return await response.json();
     }
 
     let gameStarted = false;
@@ -13,16 +13,16 @@
         gameStarted = true;
     }
 </script>
-{#await loadData() then data}
-<div class="content">
-    {#if !gameStarted}
-        <button on:click={startGame}>Start</button>
-    {:else}
-        <GameComponent {data} />
-    {/if}
-</div>
-{/await}
 
+{#await loadData() then data}
+    <div class="content">
+        {#if !gameStarted}
+            <button on:click={startGame}>Start</button>
+        {:else}
+            <GameComponent {data} />
+        {/if}
+    </div>
+{/await}
 
 <style>
     .content {
