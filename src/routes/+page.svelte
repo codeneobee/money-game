@@ -17,7 +17,10 @@
 {#await loadData() then data}
     <div class="content">
         {#if !gameStarted}
+        <div class="front-page">
+            <h1 class="header">Guess the mbeezy line</h1>
             <button on:click={startGame}>Start</button>
+        </div>
         {:else}
             <GameComponent {data} />
         {/if}
@@ -25,9 +28,14 @@
 {/await}
 
 <style>
+    .header {
+        font-family: gangsta;
+        font-size: 4rem;
+    }
+
     .content {
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
