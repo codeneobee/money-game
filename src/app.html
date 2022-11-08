@@ -23,6 +23,9 @@
 	}
 
 	.container {
+		position: absolute;
+		left: 0;
+		top: 0;
 		width: 100vw;
 		height: 100vh;
 		background-color: rgba(28, 1, 41, 0.61)
@@ -33,13 +36,8 @@
 	}
 
 	.sliding-background {
-		overflow: hidden;
-		position: absolute;
-		left: 0;
-		top: 0;
 		z-index: -100;
 		background: url("background/money-game-background-image.png") repeat-x;
-		background-size: cover;
 		width: 12960px;
 		height: 100vh;
 		animation: slide 60s linear infinite;
@@ -57,8 +55,8 @@
 </style>
 
 <body>
-	<div class="sliding-background">
-		<div class="sliding-background-container"></div>
+	<div class="sliding-background-container">
+		<div class="sliding-background"></div>
 	</div>
 	<div class="container">
 		%sveltekit.body%
