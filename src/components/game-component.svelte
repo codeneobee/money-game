@@ -89,6 +89,7 @@
 
     .line,
     .lose-message {
+        white-space: pre-line;
         display: block;
         margin-bottom: 2rem;
     }
