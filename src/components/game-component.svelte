@@ -1,6 +1,8 @@
 <script lang="ts">
-    import type { Line } from "src/types/line";
-    import type { SongOption } from "src/types/song-option";
+    import { getRandomInt } from "../helpers/get-random-int";
+    import type { Line } from "../types/line";
+    import type { SongOption } from "../types/song-option";
+    import ResultButton from "./ResultButton.svelte";
 
     export let data: Line[];
 
@@ -32,9 +34,7 @@
     }
 
     function sampleRandom(list: Line[]) {
-        const index = Math.floor(Math.random() * list.length);
-        console.log(index);
-        return list[index];
+        return list[getRandomInt(0, list.length)];
     }
 
     function onCorrect() {
@@ -42,7 +42,7 @@
         line = game();
     }
 
-    function onFailure() {
+    function onIncorrect() {
         gameStarted = false;
     }
 
@@ -63,12 +63,11 @@
         <span class="line">{line.lyrics}</span>
         <div class="button-container">
             {#each line.songOptions as songOption}
-                <button
-                    on:click={() =>
-                        songOption.correct ? onCorrect() : onFailure()}
-                >
-                    {songOption.song}
-                </button>
+                <ResultButton
+                    {songOption}
+                    on:correct={onCorrect}
+                    on:incorrect={onIncorrect}
+                />
             {/each}
         </div>
     {:else}
@@ -81,13 +80,15 @@
 
 <style>
     .game-container {
+        font-family: 'SuisseIntl';
         padding: 32px;
         border-radius: 15px;
-        background-color: #373a36;
+        background-color: rgb(37, 0, 58);
         color: white;
     }
 
-    .line, .lose-message{
+    .line,
+    .lose-message {
         display: block;
         margin-bottom: 2rem;
     }
@@ -97,5 +98,18 @@
         grid-template-columns: repeat(3, 1fr);
         column-gap: 2rem;
         width: 100%;
+    }
+
+    button {
+        border: none;
+        border-radius: 30px;
+        padding: 8px;
+        background-color: white;
+        color: rgb(37, 0, 58);
+        transition: background-color 100ms linear;
+    }
+
+    button:hover {
+        background-color: darkgrey;
     }
 </style>
