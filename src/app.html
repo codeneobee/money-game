@@ -16,7 +16,9 @@
 		font-style: normal;
 	}
 
-	html, body {
+	html,
+	body {
+		height: -webkit-fill-available;
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -27,7 +29,6 @@
 		left: 0;
 		top: 0;
 		width: 100vw;
-		height: 100vh;
 		background-color: rgba(28, 1, 41, 0.61)
 	}
 
@@ -36,9 +37,9 @@
 	}
 
 	.sliding-background {
-		z-index: -100;
-		background: url("background/money-game-background-image.png") repeat-x;
-		width: 12960px;
+		background: url("background/money-game-background-image-740.png") repeat-x;
+		background-size: cover;
+		width: 6660px;
 		height: 100vh;
 		animation: slide 60s linear infinite;
 	}
@@ -49,7 +50,7 @@
 		}
 
 		100% {
-			transform: translate3d(-4320px, 0, 0)
+			transform: translate3d(-2220px, 0, 0)
 		}
 	}
 </style>
