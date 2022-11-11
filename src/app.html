@@ -30,18 +30,18 @@
 		margin: 0;
 		padding: 0;
 		border: 0;
+		width: 100vw;
+		overflow: hidden;
 	}
 
 	.container {
 		position: absolute;
 		left: 0;
 		top: 0;
-		width: 100vw;
 		background-color: rgba(28, 1, 41, 0.61)
 	}
 
 	.sliding-background-container {
-		overflow: hidden;
 		position: absolute;
 		height: 100%;
 	}
@@ -50,24 +50,28 @@
 		height: 100%;
 		width: 100%;
 		position: relative;
-		animation: slide 60s infinite linear;
+		animation: slide 180s infinite linear;
 	}
 
 	.sliding-background::after {
-		position: absolute;
 		content: "";
-		width: 900%;
+		width: 1000%;
 		height: 100%;
+		position: absolute;
 		background-image: url('background/money-game-background-image-740.png');
-		background-size: 11.1% 100%;
+		background-size: 10% 100%;
+	}
+
+	img {
+		height: 100%
 	}
 
 	@keyframes slide {
-		0% {
+		from {
 			transform: translateX(-100%)
 		}
 
-		100% {
+		to {
 			transform: translateX(-200%)
 		}
 	}
