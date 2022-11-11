@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Line } from "../types/line";
-    import GameComponent from "../components/game-component.svelte";
+    import GameComponent from "../components/GameComponent.svelte";
     import MediaQuery from "svelte-media-query";
 
     async function loadData(): Promise<Line[]> {
