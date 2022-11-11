@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Line } from "../types/line";
     import GameComponent from "../components/game-component.svelte";
+    import MediaQuery from "svelte-media-query";
 
     async function loadData(): Promise<Line[]> {
         const response = await fetch("lines_songs.json");
@@ -17,8 +18,10 @@
 {#await loadData() then data}
     <div class="content">
         {#if !gameStarted}
-            <div class="front-page">
-                <h1 class="header">Guess the mbeezy line</h1>
+        <div class="front-page">
+                <MediaQuery query="(max-width: 768px)" let:matches>
+                    <h1 class="header" class:small="{matches}">Guess the mbeezy line</h1>
+                </MediaQuery>
                 <button class=start-button on:click={startGame}>Start</button>
             </div>
         {:else}
@@ -38,10 +41,14 @@
     .header {
         width: calc(100% - 60px);
         font-family: MadisonStreet;
-        font-size: 4rem;
-        color:rgb(106, 1, 167);
+        font-size: 128px;
+        color:rgb(70, 0, 110);
         text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF,
             1px 1px 0 #FFF;
+    }
+
+    .header.small {
+        font-size: 64px;
     }
 
     .content {

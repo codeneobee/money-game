@@ -3,6 +3,7 @@
     import type { Line } from "../types/line";
     import type { SongOption } from "../types/song-option";
     import ResultButton from "./ResultButton.svelte";
+    import MediaQuery from "svelte-media-query";
 
     export let data: Line[];
 
@@ -58,29 +59,54 @@
 </script>
 
 <div class="game-container">
-    {#if gameStarted}
-        <span>Score: {score}</span>
-        <span class="line">{line.lyrics}</span>
-        <div class="button-container">
-            {#each line.songOptions as songOption}
-                <ResultButton
-                    {songOption}
-                    on:correct={onCorrect}
-                    on:incorrect={onIncorrect}
-                />
-            {/each}
-        </div>
-    {:else}
-        <div>
-            <span class="lose-message">Frag nicht was für Score: {score}</span>
-            <button on:click={resetGame}>Noch einmal</button>
-        </div>
-    {/if}
+    <div class="line-container">
+        {#if gameStarted}
+            <span class="line">{line.lyrics}</span>
+            <div class="button-container">
+                {#each line.songOptions as songOption}
+                    <ResultButton
+                        {songOption}
+                        on:correct={onCorrect}
+                        on:incorrect={onIncorrect}
+                    />
+                {/each}
+            </div>
+        {:else}
+            <div>
+                <span class="lose-message"
+                    >Frag nicht was für Score: {score}</span
+                >
+                <button on:click={resetGame}>Noch einmal</button>
+            </div>
+        {/if}
+    </div>
+    <MediaQuery query="(max-width: 768px)" let:matches>
+        <span class="score-display" class:small="{matches}">{score}</span>
+    </MediaQuery>
 </div>
 
 <style>
     .game-container {
-        font-family: 'SuisseIntl';
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .score-display {
+        font-family: MadisonStreet;
+        font-size: 128px;
+        margin-top: 64px;
+        color: rgb(70, 0, 110);
+        text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff,
+            1px 1px 0 #fff;
+    }
+
+    .score-display.small {
+        font-size: 64px;
+    }
+
+    .line-container {
+        font-family: "SuisseIntl";
         padding: 32px;
         border-radius: 15px;
         background-color: rgb(37, 0, 58);

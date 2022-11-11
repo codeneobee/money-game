@@ -41,31 +41,43 @@
 	}
 
 	.sliding-background-container {
-		overflow: hidden
+		overflow: hidden;
+		position: absolute;
+		height: 100%;
 	}
 
 	.sliding-background {
-		background: url("background/money-game-background-image-740.png") repeat-x;
-		background-size: cover;
-		width: 6660px;
-		height: 100vh;
-		animation: slide 60s linear infinite;
+		height: 100%;
+		width: 100%;
+		position: relative;
+		animation: slide 60s infinite linear;
+	}
+
+	.sliding-background::after {
+		position: absolute;
+		content: "";
+		width: 900%;
+		height: 100%;
+		background-image: url('background/money-game-background-image-740.png');
+		background-size: 11.1% 100%;
 	}
 
 	@keyframes slide {
 		0% {
-			transform: translate3d(0, 0, 0)
+			transform: translateX(-100%)
 		}
 
 		100% {
-			transform: translate3d(-2220px, 0, 0)
+			transform: translateX(-200%)
 		}
 	}
 </style>
 
 <body>
 	<div class="sliding-background-container">
-		<div class="sliding-background"></div>
+		<div class="sliding-background">
+			<img src="background/money-game-background-image-740.png">
+		</div>
 	</div>
 	<div class="container">
 		%sveltekit.body%
