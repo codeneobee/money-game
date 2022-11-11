@@ -10,8 +10,8 @@
     let showQuestionResult = false;
 
     
-    const positiveSounds = 18;
-    const negativeSounds = 16;
+    const positiveSounds = 15;
+    const negativeSounds = 10;
     
     function startTimer(func: () => void) {
         setTimeout(func, 1000);
