@@ -26,7 +26,6 @@
 
 	html,
 	body {
-		height: -webkit-fill-available;
 		margin: 0;
 		padding: 0;
 		border: 0;
@@ -36,12 +35,17 @@
 
 	.container {
 		position: absolute;
-		left: 0;
-		top: 0;
-		background-color: rgba(28, 1, 41, 0.61)
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.application {
+		background-color: rgba(28, 1, 41, 0.61);
 	}
 
 	.sliding-background-container {
+		z-index: -100;
 		position: absolute;
 		height: 100%;
 	}
@@ -78,13 +82,15 @@
 </style>
 
 <body>
-	<div class="sliding-background-container">
-		<div class="sliding-background">
-			<img src="background/money-game-background-image-740.png">
-		</div>
-	</div>
 	<div class="container">
-		%sveltekit.body%
+		<div class="sliding-background-container">
+			<div class="sliding-background">
+				<img src="background/money-game-background-image-740.png">
+			</div>
+		</div>
+		<div class="application">
+			%sveltekit.body%
+		</div>
 	</div>
 </body>
 
