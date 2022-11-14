@@ -2,10 +2,12 @@
     import type { Line } from "../types/line";
     import GameComponent from "../components/GameComponent.svelte";
     import MediaQuery from "svelte-media-query";
+    import { shuffle } from "../helpers/shuffleList";
 
     async function loadData(): Promise<Line[]> {
         const response = await fetch("lines_songs.json");
-        return await response.json();
+        const json =  await response.json();
+        return shuffle(json)
     }
 
     let gameStarted = false;
@@ -25,7 +27,7 @@
                 <button class=start-button on:click={startGame}>Start</button>
             </div>
         {:else}
-            <GameComponent {data} />
+            <GameComponent shuffledData="{data}" />
         {/if}
     </div>
 {/await}

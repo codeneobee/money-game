@@ -4,8 +4,10 @@
     import type { SongOption } from "../types/song-option";
     import ResultButton from "./ResultButton.svelte";
     import MediaQuery from "svelte-media-query";
+    import { shuffle } from "../helpers/shuffleList";
 
-    export let data: Line[];
+    export let shuffledData: Line[];
+    let index = 0;
 
     let score = 0;
     let gameStarted = true;
@@ -13,11 +15,12 @@
     let line = game();
 
     function game() {
-        return gameStep(data, 3);
+        return gameStep(shuffledData, 3);
     }
 
     function gameStep(songs: Line[], options: number) {
-        const line = sampleRandom(songs);
+        const line = shuffledData[index];
+        index += 1;
         const songOptions: SongOption[] = [{ song: line.song, correct: true }];
 
         while (songOptions.length <= options - 1) {
@@ -52,10 +55,6 @@
         score = 0;
         line = game();
     }
-
-    function shuffle(songs: SongOption[]) {
-        return songs.sort(() => 0.5 - Math.random());
-    }
 </script>
 
 <div class="game-container">
@@ -81,7 +80,7 @@
         {/if}
     </div>
     <MediaQuery query="(max-width: 768px)" let:matches>
-        <span class="score-display" class:small="{matches}">{score}</span>
+        <span class="score-display" class:small={matches}>{score}</span>
     </MediaQuery>
 </div>
 
